@@ -1,0 +1,25 @@
+{
+  "name": "typst-electron-wasm",
+  "version": "1.0.0",
+  "description": "Electron sandboxed build with Rust WASM compilation using webpack",
+  "scripts": {
+    "build:rust": "wasm-pack build ./compiler --target web",
+    "build:ts": "tsc",
+    "build:webpack": "webpack",
+    "build": "npm run build:rust && npm run build:ts && npm run build:webpack",
+    "check-types": "tsc --noEmit -skipLibCheck",
+    "test": "npm run build && rm -rf ../.obsidian/plugins/typst/* && cp dist/main.js ../.obsidian/plugins/typst && cp style.css ../.obsidian/plugins/typst && cp manifest.json ../.obsidian/plugins/typst"
+  },
+  "dependencies": {
+    "compiler": "file:compiler/pkg"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.0",
+    "electron": "^26.2.2",
+    "obsidian": "^1.8.7",
+    "ts-loader": "^9.4.4",
+    "typescript": "^5.2.2",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
+  }
+}
